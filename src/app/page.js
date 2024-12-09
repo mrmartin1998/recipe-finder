@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import SearchBar from '@/components/SearchBar';
 import RecipeGrid from '@/components/RecipeGrid';
+import LoadingSpinner from '@/components/LoadingSpinner';
 import { searchRecipes } from '@/lib/api/recipes';
 
 export default function Home() {
@@ -26,7 +27,7 @@ export default function Home() {
       <h1 className="text-4xl font-bold text-center mb-8">Recipe Finder</h1>
       <SearchBar onSearch={handleSearch} />
       {loading ? (
-        <div className="text-center">Loading...</div>
+        <LoadingSpinner />
       ) : (
         <RecipeGrid recipes={recipes} />
       )}
