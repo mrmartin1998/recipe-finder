@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import FavoriteButton from './FavoriteButton';
 
 export default function RecipeCard({ recipe }) {
   if (!recipe) return null;
@@ -13,7 +14,10 @@ export default function RecipeCard({ recipe }) {
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{recipe.title}</h2>
+        <div className="flex justify-between items-start">
+          <h2 className="card-title">{recipe.title}</h2>
+          <FavoriteButton recipe={recipe} />
+        </div>
         <div className="flex gap-2 text-sm">
           <span className="badge badge-primary">{recipe.readyInMinutes}min</span>
           <span className="badge badge-secondary">{recipe.servings} servings</span>
