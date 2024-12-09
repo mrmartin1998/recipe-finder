@@ -2,14 +2,17 @@
 import { useEffect, useState } from 'react';
 import { getRecipeById } from '@/lib/api/recipes';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import { useParams } from 'next/navigation';
 
-export default function RecipePage({ params }) {
+export default function RecipePage() {
+  const params = useParams();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     async function loadRecipe() {
+      if (!params?.id) return;
       try {
         const data = await getRecipeById(params.id);
         setRecipe(data);
@@ -21,7 +24,7 @@ export default function RecipePage({ params }) {
       }
     }
     loadRecipe();
-  }, [params.id]);
+  }, [params?.id]);
 
   if (loading) return <LoadingSpinner />;
   if (error) return <div className="text-center text-error">{error}</div>;
@@ -66,15 +69,21 @@ export default function RecipePage({ params }) {
           <div className="stats shadow">
             <div className="stat">
               <div className="stat-title">Calories</div>
-              <div className="stat-value">{recipe.nutrition?.nutrients?.[0]?.amount || 'N/A'}</div>
+              <div className="stat-value">
+                {recipe.nutrition?.nutrients?.find(n => n.name === 'Calories')?.amount.toFixed(0) || 'N/A'}
+              </div>
             </div>
             <div className="stat">
               <div className="stat-title">Protein</div>
-              <div className="stat-value">{recipe.nutrition?.nutrients?.[1]?.amount || 'N/A'}g</div>
+              <div className="stat-value">
+                {recipe.nutrition?.nutrients?.find(n => n.name === 'Protein')?.amount.toFixed(0) || 'N/A'}g
+              </div>
             </div>
             <div className="stat">
               <div className="stat-title">Carbs</div>
-              <div className="stat-value">{recipe.nutrition?.nutrients?.[2]?.amount || 'N/A'}g</div>
+              <div className="stat-value">
+                {recipe.nutrition?.nutrients?.find(n => n.name === 'Carbohydrates')?.amount.toFixed(0) || 'N/A'}g
+              </div>
             </div>
           </div>
         </div>

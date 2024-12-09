@@ -17,7 +17,7 @@ export async function searchRecipes(query) {
 export async function getRecipeById(id) {
   try {
     const response = await fetch(
-      `${BASE_URL}/${id}/information?apiKey=${API_KEY}`
+      `${BASE_URL}/${id}/information?apiKey=${API_KEY}&includeNutrition=true`
     );
     const data = await response.json();
     return data;
