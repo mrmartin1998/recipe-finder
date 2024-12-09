@@ -16,7 +16,7 @@ const geistMono = localFont({
 });
 
 export default function RootLayout({ children }) {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
