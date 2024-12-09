@@ -1,5 +1,7 @@
+"use client";
 import localFont from "next/font/local";
 import Navigation from "@/components/Navigation";
+import { useState, useEffect } from "react";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -13,16 +15,17 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-export const metadata = {
-  title: "Recipe Finder",
-  description: "Find and save your favorite recipes",
-};
-
 export default function RootLayout({ children }) {
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
+
   return (
-    <html lang="en" data-theme="light">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}>
-        <Navigation />
+    <html lang="en" data-theme={theme}>
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-base-100`}>
+        <Navigation onThemeChange={setTheme} />
         <main className="container mx-auto px-4 py-8">
           {children}
         </main>
