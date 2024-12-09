@@ -24,6 +24,7 @@ module.exports = {
           accent: "#45B7D1",
           neutral: "#2C3E50",
           "base-100": "#FFFFFF",
+          "base-content": "#1f2937",
         },
         dark: {
           ...require("daisyui/src/theming/themes")["dark"],
@@ -32,6 +33,7 @@ module.exports = {
           accent: "#45B7D1",
           neutral: "#2C3E50",
           "base-100": "#1a1a1a",
+          "base-content": "#f3f4f6",
         },
       },
     ],
